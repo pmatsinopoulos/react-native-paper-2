@@ -7,35 +7,24 @@
  */
 
 import React, {Fragment, useState} from 'react';
-import {View} from 'react-native';
-import {Appbar, Divider, Button, Menu} from 'react-native-paper';
+import {Appbar, Button, Modal, Portal, Text} from 'react-native-paper';
 
 const App = () => {
   const [visible, setVisible] = useState(false);
-  const _openMenu = () => setVisible(true);
-  const _closeMenu = () => setVisible(false);
 
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <View
-        style={{
-          paddingTop: 50,
-          flexDirection: 'row',
-          justifyContent: 'center',
-        }}>
-        <Menu
-          visible={visible}
-          onDismiss={_closeMenu}
-          anchor={<Button onPress={_openMenu}>Show menu</Button>}>
-          <Menu.Item onPress={() => {}} title="Item 1" />
-          <Menu.Item onPress={() => {}} title="Item 2" />
-          <Divider />
-          <Menu.Item onPress={() => {}} title="Item 3" />
-        </Menu>
-      </View>
+      <Portal>
+        <Modal visible={visible} onDismiss={() => setVisible(false)}>
+          <Text>Foo text in Modal</Text>
+        </Modal>
+      </Portal>
+      <Button style={{marginTop: 30}} onPress={() => setVisible(true)}>
+        Show
+      </Button>
     </Fragment>
   );
 };
