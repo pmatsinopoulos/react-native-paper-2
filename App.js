@@ -6,31 +6,32 @@
  * @flow
  */
 
-import React, {Fragment, useState} from 'react';
-import {Appbar, Button, Snackbar} from 'react-native-paper';
+import React, {Fragment} from 'react';
+import {StyleSheet} from 'react-native';
+import {Appbar, Surface, Text} from 'react-native-paper';
 
 const App = () => {
-  const [visible, setVisible] = useState(false);
-
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <Button onPress={() => setVisible(!visible)}>
-        {visible ? 'Hide' : 'Show'}
-      </Button>
-      <Snackbar
-        visible={visible}
-        onDismiss={() => setVisible(false)}
-        action={{
-          label: 'Undo',
-          onPress: () => {},
-        }}>
-        Hi there! I am a Snackbar
-      </Snackbar>
+      <Surface style={styles.surface}>
+        <Text>Surface</Text>
+      </Surface>
     </Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  surface: {
+    padding: 8,
+    height: 80,
+    width: 80,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 14,
+  },
+});
 
 export default App;
