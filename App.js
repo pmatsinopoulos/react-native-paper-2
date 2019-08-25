@@ -7,28 +7,26 @@
  */
 
 import React, {Fragment, useState} from 'react';
-import {Appbar, FAB, Portal} from 'react-native-paper';
+import {View} from 'react-native';
+import {Appbar, HelperText, TextInput} from 'react-native-paper';
 const App = () => {
-  const [fabGroupOpen, setFabGroupOpen] = useState(false);
+  const [email, setEmail] = useState('');
 
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <Portal>
-        <FAB.Group
-          open={fabGroupOpen}
-          icon={fabGroupOpen ? 'today' : 'add'}
-          actions={[
-            {icon: 'add'},
-            {icon: 'star', label: 'Star'},
-            {icon: 'email', label: 'Email'},
-            {icon: 'bell', label: 'Reminder'}
-          ]}
-          onStateChange={({open}) => setFabGroupOpen(open)}
+      <View>
+        <TextInput
+          label="Email"
+          value={email}
+          onChangeText={text => setEmail(text)}
         />
-      </Portal>
+        <HelperText type="error" visible={!email.includes('@')}>
+          Email address is invalid!
+        </HelperText>
+      </View>
     </Fragment>
   );
 };
