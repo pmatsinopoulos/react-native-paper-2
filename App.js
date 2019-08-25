@@ -6,23 +6,34 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
-import {Appbar} from 'react-native-paper';
+import React, {useState} from 'react';
+import {Image} from 'react-native';
+import {Banner} from 'react-native-paper';
 
 const App = () => {
-  const _goBack = () => console.log('Went back');
-
-  const _onSearch = () => console.log('Searching');
-
-  const _onMore = () => console.log('Shown more');
+  const [bannerVisible, setBannerVisible] = useState(true);
 
   return (
-    <Appbar.Header>
-      <Appbar.BackAction onPress={_goBack} />
-      <Appbar.Content title="Title" subtitle="Subtitle" />
-      <Appbar.Action icon="search" onPress={_onSearch} />
-      <Appbar.Action icon="more-vert" onPress={_onMore} />
-    </Appbar.Header>
+    <Banner
+      visible={bannerVisible}
+      actions={[
+        {
+          label: 'Fix it',
+          onPress: () => setBannerVisible(false),
+        },
+        {
+          label: 'Learn More',
+          onPress: () => setBannerVisible(false),
+        },
+      ]}
+      image={({size}) => (
+        <Image
+          source={{uri: `https://via.placeholder.com/${size}`}}
+          style={{width: size, height: size}}
+        />
+      )}>
+      There was a problem processing a transaction on your credit card
+    </Banner>
   );
 };
 
