@@ -6,32 +6,23 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
-import {StyleSheet} from 'react-native';
-import {Appbar, Surface, Text} from 'react-native-paper';
+import React, {Fragment, useState} from 'react';
+import {Appbar, Switch} from 'react-native-paper';
 
 const App = () => {
+  const [isSwitchedOn, setIsSwitchedOn] = useState(false);
+
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <Surface style={styles.surface}>
-        <Text>Surface</Text>
-      </Surface>
+      <Switch
+        value={isSwitchedOn}
+        onValueChange={() => setIsSwitchedOn(prev => !prev)}
+      />
     </Fragment>
   );
 };
-
-const styles = StyleSheet.create({
-  surface: {
-    padding: 8,
-    height: 80,
-    width: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 14,
-  },
-});
 
 export default App;
