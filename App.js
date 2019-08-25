@@ -7,16 +7,28 @@
  */
 
 import React, {Fragment, useState} from 'react';
-import {Appbar} from 'react-native-paper';
-import MyFAB from './components/MyFAB';
-
+import {Appbar, FAB, Portal} from 'react-native-paper';
 const App = () => {
+  const [fabGroupOpen, setFabGroupOpen] = useState(false);
+
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <MyFAB />
+      <Portal>
+        <FAB.Group
+          open={fabGroupOpen}
+          icon={fabGroupOpen ? 'today' : 'add'}
+          actions={[
+            {icon: 'add'},
+            {icon: 'star', label: 'Star'},
+            {icon: 'email', label: 'Email'},
+            {icon: 'bell', label: 'Reminder'}
+          ]}
+          onStateChange={({open}) => setFabGroupOpen(open)}
+        />
+      </Portal>
     </Fragment>
   );
 };
