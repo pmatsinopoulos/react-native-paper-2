@@ -6,27 +6,23 @@
  * @flow
  */
 
-import React, {Fragment, useState} from 'react';
-import {View} from 'react-native';
-import {Appbar, HelperText, TextInput} from 'react-native-paper';
-const App = () => {
-  const [email, setEmail] = useState('');
+import React, {Fragment} from 'react';
+import {Appbar, IconButton, Colors} from 'react-native-paper';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+const App = () => {
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <View>
-        <TextInput
-          label="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-        />
-        <HelperText type="error" visible={!email.includes('@')}>
-          Email address is invalid!
-        </HelperText>
-      </View>
+      <IconButton
+        icon={({size, color}) => (
+          <MaterialCommunityIcons name="av-timer" size={size} color={color} />
+        )}
+        color={Colors.red500}
+        size={20}
+      />
     </Fragment>
   );
 };

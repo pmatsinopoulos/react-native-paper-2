@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* LearnReactNativePaper2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* LearnReactNativePaper2Tests.m */; };
 		070C6D8BE665665BAC4CF541 /* libPods-LearnReactNativePaper2-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E00687A480A92FA7A9B432F4 /* libPods-LearnReactNativePaper2-tvOS.a */; };
