@@ -6,28 +6,31 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
-import {Appbar, Avatar, Chip} from 'react-native-paper';
+import React, {Fragment, useState} from 'react';
+import {Appbar, Button, Dialog, Paragraph, Portal} from 'react-native-paper';
 
 const App = () => {
+  const [showDialog, setShowDialog] = useState(false);
+
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <Chip
-        onClose={() => console.log('closed')}
-        selected={true}
-        avatar={
-          <Avatar.Image
-            source={require('./assets/images/lion.jpg')}
-            size={24}
-          />
-        }
-        onPress={() => console.log('Pressed')}
-        mode="outlined">
-        Example Chip
-      </Chip>
+      <Button onPress={() => setShowDialog(true)}>Show Dialog</Button>
+      <Portal>
+        <Dialog visible={showDialog} onDismiss={() => setShowDialog(false)} dismissable={false}>
+          <Dialog.Title>This is a title</Dialog.Title>
+          <Dialog.Content>
+            <Paragraph>
+              This is a simple dialog
+            </Paragraph>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={() => setShowDialog(false)}>Done</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
     </Fragment>
   );
 };
