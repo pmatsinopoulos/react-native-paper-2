@@ -7,40 +7,49 @@
  */
 
 import React, {Fragment, useState} from 'react';
-import {Image} from 'react-native';
-import {Appbar, Banner} from 'react-native-paper';
+import {Appbar, BottomNavigation, Text} from 'react-native-paper';
+
+const MusicRoute = () => <Text>Music</Text>;
+const AlbumsRoute = () => <Text>Albums</Text>;
+const RecentsRoute = () => <Text>Recents</Text>;
 
 const App = () => {
-  const [bannerVisible, setBannerVisible] = useState(true);
+  const initialState = {
+    index: 0,
+    routes: [
+      {key: 'music', title: 'Music', icon: 'queue-music'},
+      {key: 'albums', title: 'Albums', icon: 'album'},
+      {key: 'recents', title: 'Recents', icon: 'history'},
+    ],
+  };
+  const [navigationState, setNavigationState] = useState(initialState);
+
+  const handleIndexChange = index =>
+    setNavigationState(prevState => ({...prevState, index}));
+
+  const renderSceneMap = ({route, jumpTo}) => {
+    switch (route.key) {
+      case 'music':
+        return MusicRoute();
+      case 'albums':
+        return AlbumsRoute();
+      case 'recents':
+        return RecentsRoute();
+      default:
+        console.error(`${route.key} is invalid route`);
+    }
+  };
 
   return (
     <Fragment>
       <Appbar.Header>
-        <Appbar.Content
-          title="Vehicle Management"
-          subtitle="Credit Card Transaction"
-        />
+        <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <Banner
-        visible={bannerVisible}
-        actions={[
-          {
-            label: 'Fix it',
-            onPress: () => setBannerVisible(false),
-          },
-          {
-            label: 'Learn More',
-            onPress: () => setBannerVisible(false),
-          },
-        ]}
-        image={({size}) => (
-          <Image
-            source={{uri: `https://via.placeholder.com/${size}`}}
-            style={{width: size, height: size}}
-          />
-        )}>
-        There was a problem processing a transaction on your credit card
-      </Banner>
+      <BottomNavigation
+        navigationState={navigationState}
+        onIndexChange={handleIndexChange}
+        renderScene={renderSceneMap}
+      />
     </Fragment>
   );
 };
