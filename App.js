@@ -7,28 +7,27 @@
  */
 
 import React, {Fragment, useState} from 'react';
-import {View} from 'react-native';
-import {Appbar, RadioButton, Text} from 'react-native-paper';
+import {Appbar, Searchbar, Text} from 'react-native-paper';
 
 const App = () => {
-  const [value, setValue] = useState('first');
-
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchbarRef = React.createRef();
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
-        <View>
-          <Text>First</Text>
-          <RadioButton value="first" />
-        </View>
-
-        <View>
-          <Text>Second</Text>
-          <RadioButton value="second" />
-        </View>
-      </RadioButton.Group>
+      <Searchbar
+        icon="search"
+        ref={searchbarRef}
+        placeholder="Type here to search"
+        onChangeText={query => setSearchQuery(query)}
+        value={searchQuery}
+        onIconPress={() => {
+          searchbarRef.current.focus();
+        }}
+      />
+      <Text>{searchQuery}</Text>
     </Fragment>
   );
 };
