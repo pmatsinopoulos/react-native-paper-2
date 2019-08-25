@@ -7,27 +7,28 @@
  */
 
 import React, {Fragment, useState} from 'react';
-import {Appbar, Searchbar, Text} from 'react-native-paper';
+import {Appbar, Button, Snackbar} from 'react-native-paper';
 
 const App = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const searchbarRef = React.createRef();
+  const [visible, setVisible] = useState(false);
+
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <Searchbar
-        icon="search"
-        ref={searchbarRef}
-        placeholder="Type here to search"
-        onChangeText={query => setSearchQuery(query)}
-        value={searchQuery}
-        onIconPress={() => {
-          searchbarRef.current.focus();
-        }}
-      />
-      <Text>{searchQuery}</Text>
+      <Button onPress={() => setVisible(!visible)}>
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Snackbar
+        visible={visible}
+        onDismiss={() => setVisible(false)}
+        action={{
+          label: 'Undo',
+          onPress: () => {},
+        }}>
+        Hi there! I am a Snackbar
+      </Snackbar>
     </Fragment>
   );
 };
