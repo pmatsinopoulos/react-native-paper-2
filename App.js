@@ -6,50 +6,38 @@
  * @flow
  */
 
-import React, {Fragment, useState} from 'react';
-import {Appbar, BottomNavigation, Text} from 'react-native-paper';
-
-const MusicRoute = () => <Text>Music</Text>;
-const AlbumsRoute = () => <Text>Albums</Text>;
-const RecentsRoute = () => <Text>Recents</Text>;
+import React, {Fragment} from 'react';
+import {
+  Appbar,
+  Avatar,
+  Button,
+  Card,
+  Title,
+  Paragraph,
+} from 'react-native-paper';
 
 const App = () => {
-  const initialState = {
-    index: 0,
-    routes: [
-      {key: 'music', title: 'Music', icon: 'queue-music'},
-      {key: 'albums', title: 'Albums', icon: 'album'},
-      {key: 'recents', title: 'Recents', icon: 'history'},
-    ],
-  };
-  const [navigationState, setNavigationState] = useState(initialState);
-
-  const handleIndexChange = index =>
-    setNavigationState(prevState => ({...prevState, index}));
-
-  const renderSceneMap = ({route, jumpTo}) => {
-    switch (route.key) {
-      case 'music':
-        return MusicRoute();
-      case 'albums':
-        return AlbumsRoute();
-      case 'recents':
-        return RecentsRoute();
-      default:
-        console.error(`${route.key} is invalid route`);
-    }
-  };
-
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <BottomNavigation
-        navigationState={navigationState}
-        onIndexChange={handleIndexChange}
-        renderScene={renderSceneMap}
-      />
+      <Card>
+        <Card.Title
+          title="Card title"
+          subtitle="Card subtitle"
+          left={props => <Avatar.Icon {...props} icon="folder" />}
+        />
+        <Card.Content>
+          <Title>Card Title</Title>
+          <Paragraph>Card Content</Paragraph>
+        </Card.Content>
+        <Card.Cover source={{uri: 'https://picsum.photos/700'}} />
+        <Card.Actions>
+          <Button>Cancel</Button>
+          <Button>Ok</Button>
+        </Card.Actions>
+      </Card>
     </Fragment>
   );
 };
