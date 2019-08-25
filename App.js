@@ -6,16 +6,29 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
-import {Appbar, ProgressBar, Colors} from 'react-native-paper';
+import React, {Fragment, useState} from 'react';
+import {View} from 'react-native';
+import {Appbar, RadioButton, Text} from 'react-native-paper';
 
 const App = () => {
+  const [value, setValue] = useState('first');
+
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <ProgressBar progress={0.5} color={Colors.red500} />
+      <RadioButton.Group onValueChange={value => setValue(value)} value={value}>
+        <View>
+          <Text>First</Text>
+          <RadioButton value="first" />
+        </View>
+
+        <View>
+          <Text>Second</Text>
+          <RadioButton value="second" />
+        </View>
+      </RadioButton.Group>
     </Fragment>
   );
 };
