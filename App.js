@@ -6,20 +6,28 @@
  * @flow
  */
 
-import React, {Fragment, useState} from 'react';
-import {Appbar, Switch} from 'react-native-paper';
+import React, {Fragment, useState, useEffect} from 'react';
+import {Appbar, TextInput} from 'react-native-paper';
 
 const App = () => {
-  const [isSwitchedOn, setIsSwitchedOn] = useState(false);
+  const [emailTextInputValue, setEmailTextInputValue] = useState(null);
+  const emailInputRef = React.createRef();
+  useEffect(() => {
+    emailInputRef.current.focus();
+  }, []);
 
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <Switch
-        value={isSwitchedOn}
-        onValueChange={() => setIsSwitchedOn(prev => !prev)}
+      <TextInput
+        label="Email"
+        value={emailTextInputValue}
+        onChangeText={newValue => setEmailTextInputValue(newValue)}
+        ref={emailInputRef}
+        placeholder="Enter your email"
+        mode="outlined"
       />
     </Fragment>
   );
