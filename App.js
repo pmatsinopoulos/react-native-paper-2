@@ -7,32 +7,35 @@
  */
 
 import React, {Fragment, useState} from 'react';
-import {Appbar, List} from 'react-native-paper';
+import {View} from 'react-native';
+import {Appbar, Divider, Button, Menu} from 'react-native-paper';
 
 const App = () => {
-  const [accordionExpanded, setAccordionExpanded] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const _openMenu = () => setVisible(true);
+  const _closeMenu = () => setVisible(false);
+
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <List.Section title="List Section Title">
-        <List.Accordion
-          title="Uncontrolled Accordion"
-          left={props => <List.Icon {...props} icon="folder" />}>
-          <List.Item title="First Item" />
-          <List.Item title="Second Item" />
-        </List.Accordion>
-
-        <List.Accordion
-          title="Controlled Accordion"
-          left={props => <List.Icon {...props} icon="folder" />}
-          onPress={() => setAccordionExpanded(prev => !prev)}
-          expanded={accordionExpanded}>
-          <List.Item title="First Item" />
-          <List.Item title="Second Item" />
-        </List.Accordion>
-      </List.Section>
+      <View
+        style={{
+          paddingTop: 50,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+        <Menu
+          visible={visible}
+          onDismiss={_closeMenu}
+          anchor={<Button onPress={_openMenu}>Show menu</Button>}>
+          <Menu.Item onPress={() => {}} title="Item 1" />
+          <Menu.Item onPress={() => {}} title="Item 2" />
+          <Divider />
+          <Menu.Item onPress={() => {}} title="Item 3" />
+        </Menu>
+      </View>
     </Fragment>
   );
 };
