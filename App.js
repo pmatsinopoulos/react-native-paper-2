@@ -6,29 +6,23 @@
  * @flow
  */
 
-import React, {Fragment, useState, useEffect} from 'react';
-import {Appbar, TextInput} from 'react-native-paper';
+import React, {Fragment, useState} from 'react';
+import {Appbar, ToggleButton} from 'react-native-paper';
 
 const App = () => {
-  const [emailTextInputValue, setEmailTextInputValue] = useState(null);
-  const emailInputRef = React.createRef();
-  useEffect(() => {
-    emailInputRef.current.focus();
-  }, []);
+  const [value, setValue] = useState('left');
 
   return (
     <Fragment>
       <Appbar.Header>
         <Appbar.Content title="Vehicle Management" subtitle="Hi!" />
       </Appbar.Header>
-      <TextInput
-        label="Email"
-        value={emailTextInputValue}
-        onChangeText={newValue => setEmailTextInputValue(newValue)}
-        ref={emailInputRef}
-        placeholder="Enter your email"
-        mode="outlined"
-      />
+      <ToggleButton.Group
+        onValueChange={newValue => setValue(newValue)}
+        value={value}>
+        <ToggleButton value="left" icon="format-align-left" />
+        <ToggleButton value="right" icon="format-align-right" />
+      </ToggleButton.Group>
     </Fragment>
   );
 };
